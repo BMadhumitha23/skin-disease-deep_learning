@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #f9ffff);
+            margin: 0;
+            padding: 30px;
+            color: #023e8a;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0077b6;
+            margin-bottom: 20px;
+        }
+
+        .result-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 80%;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 18px;
+            color: #023e8a;
+            margin: 8px 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .item {
+            background: #f0faff;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+
+        img {
+            max-width: 350px;
+            border-radius: 10px;
+            border: 3px solid #90e0ef;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #0077b6;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background-color: #023e8a;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+
+    <div class="result-card">
+        <p><strong>Disease:</strong> {{ disease }}</p>
+        <p><strong>Severity:</strong> {{ severity }}</p>
+    </div>
+
+    <div class="container">
+        <div class="item">
+            <p><strong>Original Image</strong></p>
+            <img src="{{ url_for('static', filename=original_image) }}">
+        </div>
+
+        {% if gradcam_image %}
+        <div class="item">
+            <p><strong>Grad-CAM Heatmap</strong></p>
+            <img src="{{ url_for('static', filename=gradcam_image) }}">
+        </div>
+        {% endif %}
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+        <a href="/">🔙 Upload Another Image</a>
+    </div>
+
+    <footer>Skin Disease Analysis Tool © 2025</footer>
+</body>
+</html>
